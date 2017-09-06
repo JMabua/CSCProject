@@ -1,0 +1,3 @@
+if (T<10){
+  MessageBox.Show ("NEED TO RESTOCK")
+         }
