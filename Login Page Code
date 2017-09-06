@@ -1,0 +1,105 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+
+namespace Login_Page_for_Semester_Project
+{
+    public partial class LoginPage : Form
+    {
+        public string sPassword;
+        public string sUserName;
+        public LoginPage()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.MinimumSize = this.Size;
+            this.MaximumSize = this.Size;
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            List<string> Sayings = new List<string>() {"Board Much?", "Quit it that hurts"
+                , "You probably don't have an account do you ?", "........" };
+            Random rnd = new Random();
+            MessageBox.Show(Sayings[rnd.Next(0,4)]);
+        }
+        public void Check(string username, string password)
+        {
+            SqlConnection SqlConn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=\\ict.ru.ac.za\DFS\UGHomes\g17m2225\My Documents\Visual Studio 2015\Projects\Login Page for Semester Project\Login Page for Semester Project\DB\LoginDB.mdf;Integrated Security=True;Connect Timeout=30") ;
+            string SqlQuery = "Select UserType from Tbl_Login Where UserName='" + sUserName + "'and Password='" + sPassword + "'";
+            SqlDataAdapter Comm = new SqlDataAdapter(SqlQuery,SqlConn);
+            DataTable dt = new DataTable();
+            Comm.Fill(dt);
+            try
+            {
+                if (dt.Rows[0][0].ToString() == "Admin")
+                {
+                    AdminPage SelectionPage = new AdminPage();
+                    SelectionPage.Show();
+                    this.Hide();
+                } else
+                {
+                    if (dt.Rows[0][0].ToString() == "User")
+                    {
+                        Selection SelectionPage = new Selection();
+                        SelectionPage.Show();
+                        this.Hide();
+                    }
+                    else { MessageBox.Show("Username or Password incorrect"); }
+                }  
+            } catch(IndexOutOfRangeException ie)
+            { MessageBox.Show("Username or Password incorrect, try checking if 'CapscLock' is on.'"
+                ,"Invalid Username or Password"
+                ,MessageBoxButtons.OK
+                , MessageBoxIcon.Error); }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (sUserName.Length > 0 && sPassword.Length > 0)
+                {
+                    Check(sUserName, sPassword);
+                }
+                else MessageBox.Show("Ensure that you have provided both Username and Password!", "We've encountered an ERROR",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            catch(NullReferenceException ie)
+            {
+                MessageBox.Show("Ensure that you have provided both Username and Password!", "We've encountered an ERROR",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            sUserName = txtUserName.Text;
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+            sPassword = txtPassword.Text;
+        }
+
+        private void pictureBox1_Click_1(object sender, EventArgs e)
+        {
+            List<string> Sayings = new List<string>() {"Board Much?", "Quit it that hurts"
+                , "You probably don't have an account do you ?", "........" };
+            Random rnd = new Random();
+            MessageBox.Show(Sayings[rnd.Next(0, 4)]);
+        }
+    }
+}
