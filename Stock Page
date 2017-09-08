@@ -1,6 +1,11 @@
-if (T<10){
+// currently waiting for MENU page to be loaded.
+// sList stands for Stock List.
+if (sList>10){
+  return sList-1;
+              }
+else {
   MessageBox.Show ("NEED TO RESTOCK!!!")
-         }
-// add T>10 block 
-// what is T?
-//I guess T will be a count of a specific variable like "chicken" or something..
+      }
+      
+// my programme has a profile picture which is linked to the Login Page.
+// also takes the components of the MENU page as a whole, but instead has a stock count at the end of each meal.
