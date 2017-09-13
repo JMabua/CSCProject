@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+//here im just linking the GuI components with the code.
+//this is what should happen when the button is clicked.
 namespace Lifetime_project
 {
     /// <summary>
