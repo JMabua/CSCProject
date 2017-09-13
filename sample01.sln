@@ -1,22 +1,112 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample01", "sample01\sample01.csproj", "{01DCF8F9-F052-4E83-B1E8-7F3D98206C4F}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{01DCF8F9-F052-4E83-B1E8-7F3D98206C4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01DCF8F9-F052-4E83-B1E8-7F3D98206C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01DCF8F9-F052-4E83-B1E8-7F3D98206C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01DCF8F9-F052-4E83-B1E8-7F3D98206C4F}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-EndGlobal
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.IO;
+
+namespace sample01
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    /// 
+    //the menu should get allergies and the meal preference from the previous window and
+    //display the menu acccording to the previous window
+    //
+    class Menu
+    {
+      public string preference;
+        List<string> allergies { get; set; }
+
+        public Menu(string p,List<string> a)
+        {
+            allergies = a;
+            preference = p;
+        }
+
+        //this method is to extract the meals from the preference text flie
+        //and put them in a list
+        public List<string> extract()
+        {
+            List<string> mealchoice = new List<string>();
+
+            try
+            {
+                StreamReader r = File.OpenText(preference);
+                string line = r.ReadLine();
+
+                while (line != null)
+                {
+                    mealchoice.Add(line);
+                    line = r.ReadLine();
+
+                }
+              
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("there is an error somewhere" + e.Message);
+            }
+            return mealchoice;
+        }
+
+        //then the list is looped through to get a match from the fooditem in a meal
+        public void fooditem(List<string> noallergies)
+        {
+          noallergies = new List<string>();
+            int counter = 0;
+            while (counter< extract().Count)
+            {
+                string meal = extract()[counter] ;
+                
+                for(int i=0; i < meal.Length; i++)
+                {
+                    if (!meal.Contains(allergies[i]))
+                    {
+                        noallergies.Add(meal);
+                    }
+                }
+
+                counter++;
+                  
+             }
+              
+            }
+
+        }
+
+
+
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+
+            List<string> arr = new List<string>() {"kendrick","beans"};
+            List<string> noallergies = new List<string>() {};
+            Menu menu = new Menu("default.txt", arr);
+            menu.extract();
+            menu.fooditem(noallergies);
+            tbdisplay.Text = Convert.ToString(string.Join(",", noallergies));
+
+
+        }
+
+    }
+}
