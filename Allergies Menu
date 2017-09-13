@@ -1,1 +1,66 @@
-Class ..
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace Lifetime_project
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    
+    public partial class MainWindow : Window
+    {
+        List<string> allergies = new List<string>();
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string preference = "";
+
+            if (checkbox1.IsChecked==true) {
+                allergies.Add("Fish");
+            }
+            if (checkbox2.IsChecked==true) {
+                allergies.Add("pork");
+            }
+            if(checkbox3.IsChecked==true) {
+                allergies.Add("wheat");
+            }
+            if (checkbox4.IsChecked==true) {
+                allergies.Add("soy");
+            }
+            if(checkbox5.IsChecked==true) {
+                allergies.Add("peanuts");
+            }
+            if (checkbox6.IsChecked==true) {
+                allergies.Add("beans");
+            }
+            
+            
+          if (radiobutton1.IsChecked==true) {
+                preference = "Default.txt";
+          }else if (radiobutton2.IsChecked==true) {
+                preference = "Vegan.txt";
+          }
+          else if (radiobutton3.IsChecked==true) {
+                preference = "Halaal.txt";
+          } else if (radiobutton4.IsChecked==true) {
+                preference = "African.txt";
+          }
+        }
+    }
+}
