@@ -1,11 +1,28 @@
 // currently waiting for MENU page to be loaded.
-// sList stands for Stock List.
-if (sList>10){
-  return sList-1;
-              }
-else {
-  MessageBox.Show ("NEED TO RESTOCK!!!")
-      }
+{
+   num1 = Convert.ToInt32(textBox1.text);
+            if (num1 > 10)
+            {
+                num1 - 1;
+            }
+            else
+            {
+                MessageBox.Show("Restock meal option!");
+            }
+
+        }
+
+        private void textBox6_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            num2 = Convert.ToInt32(textBox1.text);
+            if (num2 > 10)
+            {
+                num2 - 1;
+            }
+            else
+            {
+                MessageBox.Show("Restock meal option!");
+            }
       
 // my programme has a profile picture which is linked to the Login Page.
 // also takes the components of the MENU page as a whole, but instead has a stock count at the end of each meal.
