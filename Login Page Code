@@ -28,7 +28,7 @@ namespace Login_Page_for_Semester_Project
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            List<string> Sayings = new List<string>() {"Board Much?", "Quit it that hurts" // *Bored much?
+            List<string> Sayings = new List<string>() {"Bored Much?", "Quit it that hurts" 
                 , "You probably don't have an account do you ?", "........" };
             Random rnd = new Random();
             MessageBox.Show(Sayings[rnd.Next(0,4)]);
