@@ -61,6 +61,25 @@ namespace Lifetime_project
                 a.allergies.Add("beans");
             }
             
+           if (checkbox1.IsChecked==false{
+           a.allergies.Remove("Fish");
+           }
+           if (checkbox2.IsChecked==false) {
+           a.allergies.Remove ("pork");
+           }
+           if(checkbox3.IsChecked==false) {
+           a.allergies.Remove ("wheat");
+           }
+           if (checkbox4.IsChecked==false) {
+           a.allergies.Remove ("soy");
+           }
+           if(checkbox5.IsChecked==false) {
+           a.allergies.Remove ("peanuts");
+           }
+           if (checkbox6.IsChecked==false) {
+           a.allergies.Remove("beans");
+           }
+            
             
             
           if (radiobutton1.IsChecked==true) {
