@@ -1,28 +1,183 @@
 // currently waiting for MENU page to be loaded.
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using  System.Data.SqlClient;
+using System.IO;
+namespace Login_Page_for_Semester_Project
 {
-   num1 = Convert.ToInt32(textBox1.text);
-            if (num1 > 10)
+    public partial class AdminPage : Form
+    {
+        public AdminPage()
+        {
+            InitializeComponent();
+            this.Text = $"Welcome Admin";
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            DialogResult res = MessageBox.Show("Do you want to logoff ?", "Logoff ?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (res == DialogResult.Yes)
             {
-                num1 - 1;
+                LoginPage TloginPage = new LoginPage();
+                this.Close();
+                TloginPage.Show();
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            StreamWriter sw = new StreamWriter("StockextFile.txt");
+            if(richTextBox1.Text.Length < 1)
+            {
+                MessageBox.Show("This is an empty file, Insert some data in the block below", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                MessageBox.Show("Restock meal option!");
+                sw.Write(richTextBox1.Text);
+                MessageBox.Show("Update succesful");
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                StreamReader sr = new StreamReader("MenuTextFile.txt");
+                string line = "";
+                while ((line = sr.ReadLine()) != null)
+                {
+                    richTextBox1.Text += line + "/n";
+                }
+            } catch (FileNotFoundException ie)
+            {
+                MessageBox.Show(ie.Message);
             }
 
         }
 
-        private void textBox6_TextChanged(object sender, TextChangedEventArgs e)
+        private void users_TableBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-            num2 = Convert.ToInt32(textBox1.text);
-            if (num2 > 10)
+            this.Validate();
+            //this.users_TableBindingSource.EndEdit();
+            //this.tableAdapterManager.UpdateAll(this.usersTableDataset1);
+
+        }
+
+        private void AdminPage_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'loginDBDataSet11.Tbl_Login' table. You can move, or remove it, as needed.
+            this.tbl_LoginTableAdapter.Fill(this.loginDBDataSet11.Tbl_Login);
+            this.MinimumSize = this.Size;
+            this.MaximumSize = this.Size;
+            tbl_LoginDataGridView.Visible = false;
+            iDTextBox.Visible = false;
+            usernameTextBox.Visible = false;
+            passwordTextBox.Visible = false;
+            userTypeTextBox.Visible = false;
+            bindingNavigator1.Visible = false;
+            iDLabel.Visible = false;
+            usernameLabel.Visible = false;
+            passwordLabel.Visible = false;
+            userTypeLabel.Visible = false;
+            button4.Visible = true;
+            button5.Visible = false;
+            // TODO: This line of code loads data into the 'usersTableDataset1.Users_Table' table. You can move, or remove it, as needed.
+            //this.users_TableTableAdapter.Fill(this.usersTableDataset1.Users_Table);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            tbl_LoginDataGridView.Visible = true;
+            iDTextBox.Visible = true;
+            usernameTextBox.Visible = true;
+            passwordTextBox.Visible = true;
+            userTypeTextBox.Visible = true;
+            bindingNavigator1.Visible = true;
+            iDLabel.Visible = true;
+            usernameLabel.Visible = true;
+            passwordLabel.Visible = true;
+            userTypeLabel.Visible = true;
+            button4.Visible = false;
+            button5.Visible = true;
+        }
+
+        private void fillByToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
             {
-                num2 - 1;
+                this.tbl_LoginTableAdapter.FillBy(this.loginDBDataSet11.Tbl_Login);
             }
-            else
+            catch (System.Exception ex)
             {
-                MessageBox.Show("Restock meal option!");
+                System.Windows.Forms.MessageBox.Show(ex.Message);
             }
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void fillBy1ToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.tbl_LoginTableAdapter.FillBy1(this.loginDBDataSet11.Tbl_Login);
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void iDLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            tbl_LoginDataGridView.Visible = false;
+            iDTextBox.Visible = false;
+            usernameTextBox.Visible = false;
+            passwordTextBox.Visible = false;
+            userTypeTextBox.Visible = false;
+            bindingNavigator1.Visible = false;
+            iDLabel.Visible = false;
+            usernameLabel.Visible = false;
+            passwordLabel.Visible = false;
+            userTypeLabel.Visible = false;
+            button4.Visible = true;
+            button5.Visible = false;
+        }
+    }
+}
       
 // my programme has a profile picture which is linked to the Login Page.
 // also takes the components of the MENU page as a whole, but instead has a stock count at the end of each meal.
