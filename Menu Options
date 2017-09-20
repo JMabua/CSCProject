@@ -1,35 +1,9 @@
 ﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.IO;
-
-namespace sample01
-{
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    /// 
-    //the menu should get allergies and the meal preference from the previous window and
-    //display the menu acccording to the previous window
-    //
-    class Menu
+    class Menu : user
     {
-      public string preference;
-        List<string> allergies { get; set; }
 
-        public Menu(string p,List<string> a)
+
+        public Menu(string p, List<string> a) : base()
         {
             allergies = a;
             preference = p;
@@ -40,10 +14,10 @@ namespace sample01
         public List<string> extract()
         {
             List<string> mealchoice = new List<string>();
+            StreamReader r = File.OpenText(preference);
 
             try
             {
-                StreamReader r = File.OpenText(preference);
                 string line = r.ReadLine();
 
                 while (line != null)
@@ -52,11 +26,15 @@ namespace sample01
                     line = r.ReadLine();
 
                 }
-              
+
             }
             catch (Exception e)
             {
                 MessageBox.Show("there is an error somewhere" + e.Message);
+            }
+            finally
+            {
+                r.Close();
             }
             return mealchoice;
         }
@@ -64,27 +42,33 @@ namespace sample01
         //then the list is looped through to get a match from the fooditem in a meal
         public void fooditem(List<string> noallergies)
         {
-          noallergies = new List<string>();
+            List<string> x = extract();
             int counter = 0;
-            while (counter< extract().Count)
+            //  string result = "";
+            int result = 0;
+            while (counter < x.Count)
             {
-                string meal = extract()[counter] ;
-                
-                for(int i=0; i < meal.Length; i++)
+                string[] meal = x[counter].Split(',');
+
+
+                for (int i = 0; i < meal.Length; i++)
                 {
-                    if (!meal.Contains(allergies[i]))
+                    if (allergies.Contains(meal[i]))
                     {
-                        noallergies.Add(meal);
+                        result += 1;
+
                     }
                 }
 
+                if (result > 0) { } else { noallergies.Add(x[counter]); }
+                result = 0;
                 counter++;
-                  
-             }
-              
+
             }
 
         }
+
+    }
 
 
 
@@ -95,18 +79,42 @@ namespace sample01
             InitializeComponent();
         }
 
+        List<string> arr = new List<string>() { "beans", "kendrick" };
+        List<string> noallergies = new List<string>();
+        int counter = 0;
+        string stockinfo = "";
         private void button_Click(object sender, RoutedEventArgs e)
         {
 
-            List<string> arr = new List<string>() {"kendrick","beans"};
-            List<string> noallergies = new List<string>() {};
             Menu menu = new Menu("default.txt", arr);
             menu.extract();
             menu.fooditem(noallergies);
-            tbdisplay.Text = Convert.ToString(string.Join(",", noallergies));
 
 
         }
 
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            Menu menu = new Menu("default.txt", arr);
+
+
+            tbdisplay.Text = noallergies[counter];
+            counter = (counter + 1) % noallergies.Count;
+
+
+        }
+
+        private void btnconfirm_Click(object sender, RoutedEventArgs e)
+        {
+            stockinfo = tbdisplay.Text;
+            MessageBox.Show(stockinfo);
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.label.Text = DateTime.Now.ToLongDateString();
+
+        }
     }
 }
+
