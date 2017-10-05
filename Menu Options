@@ -118,3 +118,46 @@
     }
 }
 
+//METHOD TO REMOVE INGREDIENTS FROM TEXTFILE
+            //Method to remove ingredients
+         /*   public void remeveIngredients(string SelectedMeal)
+            {
+                StreamReader sr = new StreamReader("Ingredients.txt");
+                int iCount = 0;
+                string[] textfileArr = new string[] { };
+                string line = "";
+                string[] IngredientsArray = SelectedMeal.Split(',');
+
+                while ((line = sr.ReadLine() )!= null)
+                {
+                    textfileArr[iCount] = line;
+                    iCount++;
+                }
+                int iCount2 = 0;
+                foreach(string s in IngredientsArray)
+                {
+                    foreach(string tfa in textfileArr)
+                    {
+                        string[] temp = tfa.Split('#');
+                        if(temp[0] == s)
+                        {
+                            int iT = Convert.ToInt32(temp[1]);
+                            iT = -1;
+                            temp[1] = Convert.ToString(iT);
+                            textfileArr[iCount2] = s + "#" + temp[1];
+                        }
+                        iCount2++;
+                    }
+                    iCount2 = 0;
+                    
+                }
+                sr.Close();
+                File.Delete("Ingredients.txt");
+                File.Create("Ingredients.txt");
+                StreamWriter sw = new StreamWriter("Ingredients.txt");
+                foreach(string sTemp1 in textfileArr)
+                {
+                    sw.WriteLine(sTemp1);
+                }
+            } */
+
