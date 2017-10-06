@@ -28,3 +28,59 @@ int counter = 0;
               tbdisplay.Text =noallergies[counter].Substring(0,2);
              pictureBox.Image = pics()[counter];
              counter = (counter + 1) % noallergies.Count;
+////////////////////////////////////////////
+
+
+if (checkBox10.Checked == true)
+            {
+                a.Add("fish");
+            }
+            if (checkBox11.Checked == true)
+            {
+                a.allergies.Add("pork");
+                a.allergies.Add("pork vindaloo");
+            }
+            if (checkBox9.Checked == true)
+            {
+                a.allergies.Add("wheat roti");
+                a.allergies.Add("wheat wrap");
+                a.allergies.Add("wheat");
+            }
+            if (checkBox13.Checked == true)
+            {
+                a.allergies.Add("soy burger");
+                a.allergies.Add("soya mince");
+            }
+            if (checkBox12.Checked == true)
+            {
+                //a.allergies.Add("dairyProducts");
+                a.allergies.Add("cottage cheese");
+                a.allergies.Add("mozarella chesse");
+                a.allergies.Add("cheddar");
+            }
+            if (checkBox7.Checked == true)
+            {
+                a.allergies.Add("beans");
+                a.allergies.Add("lentil");
+                a.allergies.Add("sugar beans");
+            }
+
+
+            if (radioButton5.Checked == true)
+            {
+                a.preference = "Default.txt";
+            }
+            else if (radioButton7.Checked == true)
+            {
+                a.preference = "Vegan.txt";
+            }
+            else if (radioButton6.Checked == true)
+            {
+                a.preference = "Halaal.txt";
+            }
+            ////////////////////////
+            InitializeComponent();
+
+            mealpics = new Bitmap[] { new Bitmap("TrafficLightGreen.png")/*pics.png*/};
+            picNumb= new List<int>();
+            mealchoicepics = new List<Bitmap>() { };
