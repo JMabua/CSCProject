@@ -1,0 +1,30 @@
+int counter = 0;
+        Menu1 menu;
+        List<string> noallergies=new List<string>();
+        List<string> allergies=new List<string>();
+        public Bitmap[] mealpics;
+        List<Bitmap> mealchoicepics;
+        List<int> picNumb;
+        ////////////////////////////////////////////
+        
+         public List<Bitmap> pics()
+        {
+
+
+            for (int i = 0; i < noallergies.Count; i++)
+            {
+                picNumb.Add(Convert.ToInt32(noallergies[i].Substring(0, 1)));
+            }
+
+            for (int i = 0; i < picNumb.Count; i++)
+            {
+                mealchoicepics.Add(mealpics[picNumb[i] - 1]);
+            }
+            return mealchoicepics;
+
+        }
+        \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+        menu.fooditem(noallergies);
+              tbdisplay.Text =noallergies[counter].Substring(0,2);
+             pictureBox.Image = pics()[counter];
+             counter = (counter + 1) % noallergies.Count;
