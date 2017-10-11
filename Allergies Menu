@@ -26,7 +26,12 @@ namespace Lifetime_project
 
     public string preferences { get; set; }
 
-    public user() { }
+    public user() {
+    allergies = new List<string>();
+    }
+    public void Add(string s){
+    allergies.Add(s);
+    }
 
     }
     
@@ -36,62 +41,123 @@ namespace Lifetime_project
         public MainWindow()
         {
             InitializeComponent();
+            this.Text = $"Welcome User";
+        }
+         private void sELECTION_Load(object sender, EventArgs e)
+
+        {
+
+            this.MinimumSize = this.Size;
+
+            this.MaximumSize = this.Size;
+
+            File.Delete("preference.txt");
+
+            File.Delete("allergies.txt");
+
+            a.allergies.Clear();
+
+            a.preference = "";
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
           user a = new user ();
 
-            if (checkbox1.IsChecked==true) {
-                a.allergies.Add("Fish");
+            if (checkbox10.Checked==true) {
+                a.Add("Fish");
             }
-            if (checkbox2.IsChecked==true) {
+            if (checkbox11.Checked==true) {
                 a.allergies.Add("pork");
+                a.allergies.Add("pork vindaloo");
             }
-            if(checkbox3.IsChecked==true) {
+            if(checkbox9.Checked==true) {
                 a.allergies.Add("wheat");
+                 a.allergies.Add("wheat roti");
+                a.allergies.Add("wheat wrap");
             }
-            if (checkbox4.IsChecked==true) {
-                a.allergies.Add("soy");
+            if (checkbox13.Checked==true) {
+                a.allergies.Add("soy burger");
+                a.allergies.Add("soy mince");
             }
-            if(checkbox5.IsChecked==true) {
-                a.allergies.Add("peanuts");
+            if(checkbox12.Checked==true) {
+                a.allergies.Add("cottage cheese");
+                a.allergies.Add("mozarella chesse");
+                a.allergies.Add("cheddar");
             }
-            if (checkbox6.IsChecked==true) {
+            if (checkbox7.Checked==true) {
                 a.allergies.Add("beans");
+                 a.allergies.Add("lentil");
+                a.allergies.Add("sugar beans");
             }
-            
-           if (checkbox1.IsChecked==false{
-           a.allergies.Remove("Fish");
-           }
-           if (checkbox2.IsChecked==false) {
-           a.allergies.Remove ("pork");
-           }
-           if(checkbox3.IsChecked==false) {
-           a.allergies.Remove ("wheat");
-           }
-           if (checkbox4.IsChecked==false) {
-           a.allergies.Remove ("soy");
-           }
-           if(checkbox5.IsChecked==false) {
-           a.allergies.Remove ("peanuts");
-           }
-           if (checkbox6.IsChecked==false) {
-           a.allergies.Remove("beans");
-           }
+          
             
             
             
-          if (radiobutton1.IsChecked==true) {
+          if (radiobutton5.Checked==true) {
                 a.preference = "Default.txt";
-          }else if (radiobutton2.IsChecked==true) {
-                a.preference = "Vegan.txt";
+                dowhatitdid();
+          }else if (radiobutton7.Checked==true) {
+                a.preference = "Vegetariann.txt";
+                dowhatitdid();
           }
-          else if (radiobutton3.IsChecked==true) {
+          else if (radiobutton6.Checked==true) {
                 a.preference = "Halaal.txt";
-          } else if (radiobutton4.IsChecked==true) {
-                a.preference = "African.txt";
-          }
+                dowhatitdid();
+          } else {MessageBox.Show("You have not selected a preference");   }
         }
+        void dowhatitdid()
+        {
+        DialogResult res=MessageBox.Show("Are you certain about your choices?", "confirmation?",MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (res==DialogResult.Yes){
+        try{StreamWriter readpref = File.CreateText("preference.txt");
+
+                    readpref.WriteLine(a.preference);
+
+                    readpref.Close();
+
+                    if (a.allergies.Count < 0)
+
+                    {
+
+
+                    }
+
+                    else
+
+                    {
+
+                        StreamWriter x = File.CreateText("allergies.txt");
+
+                        foreach (string allergy in a.allergies)
+
+                        {
+
+                            x.WriteLine(allergy + "\n");
+
+                        }
+
+                        x.Close();
+
+                    }
+
+                }
+
+                catch (NullReferenceException nr)
+
+                {
+
+                    MessageBox.Show(nr.Message);
+
+                }
+
+                Menu Menu = new Menu();
+
+                this.Close();
+
+                Menu.Show();
+
+            }
     }
 }
