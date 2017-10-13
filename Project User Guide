@@ -1,0 +1,29 @@
+Group name: return_to_sleep;
+Group members: Jessica Mabua, Mojela Moloi, Tanatsa Mpofu, Tandza Khoza
+Group mentor: Hilbert Muchatibaya
+Project Title: Rhodes Meal Booking System
+Project Description: 
+This project is centred around the Rhodes online booking meal system. Instead of working only using the student views when selecting a meal plan, we also take into consideration how the administration staff that manage food would also make use of the data prescribed when the student selects their meal plan. The administration staff member is then able to track the stock of the food and is notified when to make a restock before students experience any inconveniences.
+Instructions for using the Application (allowable actions): 
+To be able to use the programme, it starts from the login page. The password you provide will determine whether or not you will be taken to the administration window or the student window. If you are directed to the student window, then you are directed to the allergies/preference window, whereby you may select your meal preference, whether halaal, default or vegetarian. Then a list of allergies is given where you can select what you do not want in your menu. Clicking on the “View Menu” button will lead to another window whereby you may select the meal choice of the day. 
+On the Admin side, after one is logged on, the user’s information is indicated on the top left of the page. “Show Records” button will show a list of records that depict the number of users and their details. “View Stock” button will show the admin staff the list of food items and their stock count. This is operated as a link between what the students choose for their meals, and is then subtracted on the stock page. 
+GitHub URL: https://github.com/JMabua/CSCProject 
+Tools or Concepts Used: 
+•	Login Page- Databases were used to store usernames and passwords of both students and admin. 
+•	Allergies Page- Created a public class with properties: list <string> allergies and string preference and methods constructor () void Add (strings). If statements were used to check the state of checkboxes, and radiobuttons that the user selects. Text files for storing data and also for the link between the Allergies page and the Menu page. The try and catch statement to avoid the program from crashing and also to address exceptions if any. Method: Add () for two or more allergies that the user selects.
+ 
+•	Menu Page- Class Menu1: User (inheritance), Methods, list<string> extract (), void fooditem (list<string>x). For pictures: Bitmap[] default
+                                                                    Bitmap[] vegetarian
+                                                                    Bitmap[] halaal,
+                                                  Methods: pics (Bitmap[] x)
+
+StreamReader and methods to read through the Default, Vegetarian and halaal text files.
+List of strings to store the meal choices and also for better iteration when a meal that contains an allergy needs to be excluded. Textfiles were used to store allergy free meals.
+Arrays for the pictures to be displayed as a meal choice is also displayed.
+Lastly Exceptions were taken into consideration using the try and catch statements as well.
+•	Admin Page- Textfiles for links between windows and storing data, databases for the “Enable Edit” button that produce records.
+The group made use of classes and text files to easily store menu items. We linked the programmes together by creating class files to easily transfer information between windows.
+Our Assumptions: 
+By providing pictures alongside the menu options, students are more aware of the standard of food they will receive. Also, the students who have allergies are taken into consideration as they can choose from other meal options that do not affect their health. For the administration role in the meal system, it creates a stock awareness for easy identification of food items that need to be restocked. 
+Our Limitations: 
+The inability to change ingredients for students with allergies to widely accommodate for these students, instead of limiting their options of meals. 
